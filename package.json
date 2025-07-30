@@ -1,0 +1,44 @@
+{
+  "name": "minecraft-vsc-launcher",
+  "displayName": "Minecraft Launcher Button",
+  "description": "Just a simple button to start minecraft with ./gradlew runClient",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.50.0"
+  },
+  "categories": ["Other"],
+  "activationEvents": [
+    "onCommand:extension.runMinecraftClient"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "extension.runMinecraftClient",
+        "title": "Run Minecraft Client",
+        "icon": {
+          "light": "media/play-light.svg",
+          "dark": "media/play-dark.svg"
+        }
+      }
+    ],
+    "menus": {
+      "commandPalette": [
+        {
+          "command": "extension.runMinecraftClient",
+          "when": "true",
+          "group": "navigation"
+        }
+      ],
+      "editor/title": [
+        {
+          "command": "extension.runMinecraftClient",
+          "when": "true",
+          "group": "navigation"
+        }
+      ]
+    }
+  },
+  "scripts": {},
+  "devDependencies": {}
+}
