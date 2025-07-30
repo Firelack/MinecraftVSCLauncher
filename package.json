@@ -17,8 +17,8 @@
         "command": "extension.runMinecraftClient",
         "title": "Run Minecraft Client",
         "icon": {
-          "light": "media/play-light.svg",
-          "dark": "media/play-dark.svg"
+          "light": "media/minecraft-icon.svg",
+          "dark": "media/minecraft-icon.svg"
         }
       }
     ],
