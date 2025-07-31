@@ -2,12 +2,22 @@
   "name": "minecraft-vsc-launcher",
   "displayName": "Minecraft Launcher Button",
   "description": "Just a simple button to start minecraft with ./gradlew runClient",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "engines": {
     "vscode": "^1.50.0"
   },
+  "icon": "media/icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Firelack/MinecraftVSCLauncher.git"
+  },
+  "author": {
+    "name": "Firelack",
+    "url": "https://github.com/Firelack"
+  },
   "categories": ["Other"],
   "activationEvents": [
+    "onStartupFinished",
     "onCommand:extension.runMinecraftClient"
   ],
   "main": "./extension.js",
@@ -26,14 +36,14 @@
       "commandPalette": [
         {
           "command": "extension.runMinecraftClient",
-          "when": "true",
+          "when": "minecraft.isGradleProject",
           "group": "navigation"
         }
       ],
       "editor/title": [
         {
           "command": "extension.runMinecraftClient",
-          "when": "true",
+          "when": "minecraft.isGradleProject",
           "group": "navigation"
         }
       ]

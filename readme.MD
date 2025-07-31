@@ -37,7 +37,7 @@ A simple Visual Studio Code extension that adds a button to launch Minecraft mod
 
 Option 1 :
 
-1) Download the latest release or the .vsix file
+1) Download the latest release
 2) In VSCode, press Ctrl+Shift+P and run :
 Extension: Install from VSIX...
 3) Select the VSIX file
@@ -49,6 +49,14 @@ Option 2 :
 Developer: Install Extension from Location...
 3) Select the folder MinecraftVSCLauncher
 
+---
+
 ## 📦 Future improvements
 
-- Add a condition to show the button only if gradle.properties is present.
+This project is a work in progress. If you have any suggestions, feel free to reach out to me!
+
+---
+
+### Created by Firelack
+
+[GitHub Repository](https://github.com/Firelack/MinecraftVSCLauncher)
