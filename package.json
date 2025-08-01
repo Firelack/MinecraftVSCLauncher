@@ -2,7 +2,7 @@
   "name": "minecraft-vsc-launcher",
   "displayName": "Minecraft Launcher Button",
   "description": "Just a simple button to start minecraft client if your project is a Gradle project.",
-  "version": "0.0.3",
+  "version": "1.0.0",
   "engines": {
     "vscode": "^1.50.0"
   },
@@ -15,6 +15,7 @@
     "name": "Firelack",
     "url": "https://github.com/Firelack"
   },
+  "publisher": "Firelack",
   "categories": ["Other"],
   "activationEvents": [
     "onStartupFinished",
