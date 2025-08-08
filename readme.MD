@@ -8,6 +8,8 @@ A simple Visual Studio Code extension that adds a button to launch Minecraft mod
 
 - Adds a button in the top editor title bar.
 - Runs `./gradlew runClient` or `.\gradlew runClient` in the terminal.
+- New: Runs `./gradlew build` to build the project directly from the menu.
+- New: Supports build and run in one action (build the project, then launch the client automatically).
 - Works with Fabric and Forge mod projects using Gradle.
 - Automatically opens a terminal in the current workspace folder.
 - Warns the user if `gradle.properties` is missing.
@@ -43,6 +45,7 @@ A simple Visual Studio Code extension that adds a button to launch Minecraft mod
 
 ## 📦 Future improvements
 
+- Improve menu with button and better arrow
 This project is a work in progress. If you have any suggestions, feel free to reach out to me!
 
 ---

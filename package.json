@@ -1,8 +1,8 @@
 {
   "name": "minecraft-vsc-launcher",
   "displayName": "Minecraft Launcher Button",
-  "description": "Just a simple button to start minecraft client if your project is a Gradle project.",
-  "version": "1.0.2",
+  "description": "Just a simple button to start minecraft client or build the project if it's a Gradle project.",
+  "version": "1.2.0",
   "engines": {
     "vscode": "^1.50.0"
   },
@@ -20,7 +20,10 @@
   "activationEvents": [
     "workspaceContains:gradle.properties",
     "workspaceContains:build.gradle",
-    "onCommand:extension.runMinecraftClient"
+    "onCommand:extension.runMinecraftClient",
+    "onCommand:extension.buildMinecraftProject",
+    "onCommand:extension.buildAndRunMinecraft",
+    "onCommand:extension.showMinecraftMenu"
   ],
   "main": "./extension.js",
   "contributes": {
@@ -32,6 +35,30 @@
           "light": "media/icon_512px.png",
           "dark": "media/icon_512px.png"
         }
+      },
+      {
+        "command": "extension.buildMinecraftProject",
+        "title": "Build Minecraft Project",
+        "icon": {
+          "light": "media/build_512px.png",
+          "dark": "media/build_512px.png"
+        }
+      },
+      {
+        "command": "extension.buildAndRunMinecraft",
+        "title": "Build + Run Minecraft Project",
+        "icon": {
+          "light": "media/build_run_light.svg",
+          "dark": "media/build_run_dark.svg"
+        }
+      },
+      {
+        "command": "extension.showMinecraftMenu",
+        "title": "More Minecraft Actions",
+        "icon": {
+          "light": "media/arrow_light.svg",
+          "dark": "media/arrow_dark.svg"
+        }
       }
     ],
     "menus": {
@@ -40,13 +67,28 @@
           "command": "extension.runMinecraftClient",
           "when": "minecraft.isGradleProject",
           "group": "navigation"
+        },
+        {
+          "command": "extension.buildMinecraftProject",
+          "when": "minecraft.isGradleProject",
+          "group": "navigation"
+        },
+        {
+          "command": "extension.buildAndRunMinecraft",
+          "when": "minecraft.isGradleProject",
+          "group": "navigation"
         }
       ],
       "editor/title": [
         {
           "command": "extension.runMinecraftClient",
           "when": "minecraft.isGradleProject",
-          "group": "navigation"
+          "group": "navigation@1"
+        },
+        {
+          "command": "extension.showMinecraftMenu",
+          "when": "minecraft.isGradleProject",
+          "group": "navigation@2"
         }
       ]
     }
