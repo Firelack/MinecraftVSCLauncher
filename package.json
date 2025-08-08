@@ -2,7 +2,7 @@
   "name": "minecraft-vsc-launcher",
   "displayName": "Minecraft Launcher Button",
   "description": "Just a simple button to start minecraft client if your project is a Gradle project.",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "engines": {
     "vscode": "^1.50.0"
   },
@@ -18,7 +18,8 @@
   "publisher": "Firelack",
   "categories": ["Other"],
   "activationEvents": [
-    "onStartupFinished",
+    "workspaceContains:gradle.properties",
+    "workspaceContains:build.gradle",
     "onCommand:extension.runMinecraftClient"
   ],
   "main": "./extension.js",
@@ -28,8 +29,8 @@
         "command": "extension.runMinecraftClient",
         "title": "Run Minecraft Client",
         "icon": {
-          "light": "media/minecraft-icon.svg",
-          "dark": "media/minecraft-icon.svg"
+          "light": "media/icon_512px.png",
+          "dark": "media/icon_512px.png"
         }
       }
     ],

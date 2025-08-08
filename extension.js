@@ -2,6 +2,8 @@ const vscode = require('vscode');
 const fs = require('fs');
 const path = require('path');
 
+let minecraftTerminal = null;
+
 function isGradleProject(workspaceFolder) {
   const gradlePropsPath = path.join(workspaceFolder.uri.fsPath, 'gradle');
   return fs.existsSync(gradlePropsPath);
@@ -20,15 +22,12 @@ async function checkGradleProjectContext() {
 }
 
 function activate(context) {
-  // Mettre à jour le contexte au démarrage
   checkGradleProjectContext();
 
-  // Re-vérifier si le dossier du workspace change
   context.subscriptions.push(
     vscode.workspace.onDidChangeWorkspaceFolders(checkGradleProjectContext)
   );
 
-  // Commande pour lancer Minecraft
   let disposable = vscode.commands.registerCommand('extension.runMinecraftClient', async function () {
     const workspaceFolder = vscode.workspace.workspaceFolders?.[0];
     if (!workspaceFolder) {
@@ -42,20 +41,27 @@ function activate(context) {
       return;
     }
 
-    const terminal = vscode.window.createTerminal({
-      name: "Minecraft Client",
-      cwd: workspaceFolder.uri.fsPath,
-    });
+    // Vérifier si le terminal existe encore
+    if (!minecraftTerminal || minecraftTerminal.exitStatus !== undefined) {
+      minecraftTerminal = vscode.window.createTerminal({
+        name: "Minecraft Client",
+        cwd: workspaceFolder.uri.fsPath,
+      });
+    }
 
     const gradleCmd = process.platform === 'win32' ? '.\\gradlew' : './gradlew';
-    terminal.sendText(`${gradleCmd} runClient`);
-    terminal.show(false); // false pour ne pas forcer le focus
+    minecraftTerminal.sendText(`${gradleCmd} runClient`);
+    minecraftTerminal.show(false); // false = ne pas forcer le focus
   });
 
   context.subscriptions.push(disposable);
 }
 
-function deactivate() {}
+function deactivate() {
+  if (minecraftTerminal) {
+    minecraftTerminal.dispose();
+  }
+}
 
 module.exports = {
   activate,
