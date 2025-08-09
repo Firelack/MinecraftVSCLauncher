@@ -1,6 +1,6 @@
 # Minecraft VSC Launcher
 
-A simple Visual Studio Code extension that adds a button to launch Minecraft mod projects (Fabric or Forge) via the `./gradlew runClient` command.
+Quickly run or build your Minecraft Fabric/Forge mods directly from VSCode — no need to touch the terminal.
 
 ---
 
@@ -8,8 +8,8 @@ A simple Visual Studio Code extension that adds a button to launch Minecraft mod
 
 - Adds a button in the top editor title bar.
 - Runs `./gradlew runClient` or `.\gradlew runClient` in the terminal.
-- New: Runs `./gradlew build` to build the project directly from the menu.
-- New: Supports build and run in one action (build the project, then launch the client automatically).
+- Runs `./gradlew build` to build the project directly from the menu.
+- Supports build and run in one action (build the project, then launch the client automatically).
 - Works with Fabric and Forge mod projects using Gradle.
 - Automatically opens a terminal in the current workspace folder.
 - Warns the user if `gradle.properties` is missing.
@@ -20,8 +20,7 @@ A simple Visual Studio Code extension that adds a button to launch Minecraft mod
 
 - A Minecraft mod project using **Gradle** (Fabric or Forge).
 - The project folder must contain:
-  - a `gradlew` executable,
-  - a `gradle.properties` file (recommended).
+  - a `gradlew` executable (`gradle.properties` or `build.gradle` is necessary)
 - The VSCode workspace must be open at the root of the mod project.
 
 ---
@@ -44,8 +43,6 @@ A simple Visual Studio Code extension that adds a button to launch Minecraft mod
 ---
 
 ## 📦 Future improvements
-
-- Improve menu with button and better arrow
 
 This project is a work in progress. If you have any suggestions, feel free to reach out to me!
 
