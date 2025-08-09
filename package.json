@@ -56,8 +56,8 @@
         "command": "extension.showMinecraftMenu",
         "title": "More Minecraft Actions",
         "icon": {
-          "light": "media/arrow_light.svg",
-          "dark": "media/arrow_dark.svg"
+          "light": "media/black_more.svg",
+          "dark": "media/white_more.svg"
         }
       }
     ],

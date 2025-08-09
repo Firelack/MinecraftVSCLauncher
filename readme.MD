@@ -46,6 +46,7 @@ A simple Visual Studio Code extension that adds a button to launch Minecraft mod
 ## 📦 Future improvements
 
 - Improve menu with button and better arrow
+
 This project is a work in progress. If you have any suggestions, feel free to reach out to me!
 
 ---
