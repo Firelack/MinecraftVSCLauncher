@@ -2,9 +2,6 @@ const vscode = require('vscode');
 const fs = require('fs');
 const path = require('path');
 
-let minecraftRunTerminal;
-let minecraftBuildTerminal;
-
 function isGradleProject(workspaceFolder) {
   const gradlePropsPath = path.join(workspaceFolder.uri.fsPath, 'gradle.properties');
   return fs.existsSync(gradlePropsPath);
@@ -21,11 +18,18 @@ async function checkGradleProjectContext() {
   vscode.commands.executeCommand('setContext', 'minecraft.isGradleProject', exists);
 }
 
-function getOrCreateTerminal(name, cwd, existingTerminalRef) {
-  if (!existingTerminalRef || existingTerminalRef.exitStatus) {
-    return vscode.window.createTerminal({ name, cwd });
+/**
+ * Retourne un terminal existant avec le même nom ou en crée un nouveau.
+ */
+function getOrCreateTerminal(name, cwd) {
+  // Chercher un terminal déjà ouvert avec le même nom
+  let existing = vscode.window.terminals.find(t => t.name === name);
+  if (existing) {
+    return existing;
   }
-  return existingTerminalRef;
+
+  // Sinon, on en crée un nouveau
+  return vscode.window.createTerminal({ name, cwd });
 }
 
 function runGradleCommand(command, type) {
@@ -40,14 +44,8 @@ function runGradleCommand(command, type) {
     return;
   }
 
-  let terminal;
-  if (type === 'run') {
-    minecraftRunTerminal = getOrCreateTerminal("Minecraft Client", workspaceFolder.uri.fsPath, minecraftRunTerminal);
-    terminal = minecraftRunTerminal;
-  } else if (type === 'build') {
-    minecraftBuildTerminal = getOrCreateTerminal("Minecraft Build", workspaceFolder.uri.fsPath, minecraftBuildTerminal);
-    terminal = minecraftBuildTerminal;
-  }
+  let terminalName = type === 'run' ? "Minecraft Client" : "Minecraft Build";
+  const terminal = getOrCreateTerminal(terminalName, workspaceFolder.uri.fsPath);
 
   const gradleCmd = process.platform === 'win32' ? '.\\gradlew' : './gradlew';
   terminal.sendText(`${gradleCmd} ${command}`);
@@ -71,7 +69,7 @@ function activate(context) {
     runGradleCommand('build', 'build');
   }));
 
-  // Commande : Build + Run
+  // Commande : Build + Run (deux terminaux séparés, simultanés)
   context.subscriptions.push(vscode.commands.registerCommand('extension.buildAndRunMinecraft', () => {
     runGradleCommand('build', 'build');
     runGradleCommand('runClient', 'run');
@@ -95,8 +93,7 @@ function activate(context) {
 }
 
 function deactivate() {
-  if (minecraftRunTerminal) minecraftRunTerminal.dispose();
-  if (minecraftBuildTerminal) minecraftBuildTerminal.dispose();
+  // Ne pas disposer → on veut les garder même après désactivation/redémarrage
 }
 
 module.exports = {
