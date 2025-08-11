@@ -19,11 +19,7 @@
   "categories": ["Other"],
   "activationEvents": [
     "workspaceContains:gradle.properties",
-    "workspaceContains:build.gradle",
-    "onCommand:extension.runMinecraftClient",
-    "onCommand:extension.buildMinecraftProject",
-    "onCommand:extension.buildAndRunMinecraft",
-    "onCommand:extension.showMinecraftMenu"
+    "workspaceContains:build.gradle"
   ],
   "main": "./extension.js",
   "contributes": {
