@@ -70,7 +70,7 @@ function runGradleCommand(command, type) {
   }
 
   // Choose terminal name based on task type
-  const terminalName = type === 'run' ? "Minecraft Client" : "Minecraft Build";
+  const terminalName = type === 'run'? "Minecraft Client": type === 'build'? "Minecraft Build": "Minecraft DataGen";
   const terminal = getOrCreateTerminal(terminalName, workspaceFolder.uri.fsPath);
 
   // Run the Gradle command (platform-specific syntax)
@@ -107,6 +107,13 @@ function activate(context) {
       runGradleCommand('build', 'build');
     })
   );
+  
+  // Command: Run Data Generation
+  context.subscriptions.push(
+    vscode.commands.registerCommand('extension.runDataGen', () => {
+      runGradleCommand('runDataGen', 'dataGen');
+    })
+  );
 
   // Command: Build + Run (no waiting between tasks)
   context.subscriptions.push(
@@ -123,6 +130,7 @@ function activate(context) {
         [
           { label: "▶ Run Minecraft Client", command: 'extension.runMinecraftClient' },
           { label: "🔨 Build Project", command: 'extension.buildMinecraftProject' },
+          { label: "🗂️ Run Data Generation", command: 'extension.runDataGen' },
           { label: "🛠️ Build + Run", command: 'extension.buildAndRunMinecraft' }
         ],
         { placeHolder: "Select an action" }
