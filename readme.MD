@@ -1,6 +1,6 @@
 # Minecraft VSC Launcher
 
-Quickly run or build your Minecraft Fabric/Forge mods directly from VSCode — no need to touch the terminal.
+Quickly run or build your Minecraft Fabric/Forge mods directly from VSCode — no need to touch the terminal. You can also start dataGeneration easily.
 
 ---
 
@@ -9,6 +9,7 @@ Quickly run or build your Minecraft Fabric/Forge mods directly from VSCode — n
 - Adds a button in the top editor title bar.
 - Runs `./gradlew runClient` or `.\gradlew runClient` in the terminal.
 - Runs `./gradlew build` to build the project directly from the menu.
+- Runs `./gradlew runDatagen` to start dataGeneration
 - Supports build and run in one action (build the project, then launch the client automatically).
 - Works with Fabric and Forge mod projects using Gradle.
 - Automatically opens a terminal in the current workspace folder.
