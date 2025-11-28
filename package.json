@@ -55,6 +55,22 @@
           "light": "media/black_more.svg",
           "dark": "media/white_more.svg"
         }
+      },
+      {
+        "command": "extension.stopMinecraftClient",
+        "title": "Stop Minecraft Daemon",
+        "icon": {
+          "light": "media/icon_512px.png",
+          "dark": "media/icon_512px.png"
+        }
+      },
+      {
+        "command": "extension.refreshDependencies",
+        "title": "Refresh Dependencies",
+        "icon": {
+          "light": "media/icon_512px.png",
+          "dark": "media/icon_512px.png"
+        }
       }
     ],
     "menus": {
@@ -71,6 +87,16 @@
         },
         {
           "command": "extension.buildAndRunMinecraft",
+          "when": "minecraft.isGradleProject",
+          "group": "navigation"
+        },
+        {
+          "command": "extension.stopMinecraftClient",
+          "when": "minecraft.isGradleProject",
+          "group": "navigation"
+        },
+        {
+          "command": "extension.refreshDependencies",
           "when": "minecraft.isGradleProject",
           "group": "navigation"
         }

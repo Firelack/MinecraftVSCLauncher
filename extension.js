@@ -70,7 +70,10 @@ function runGradleCommand(command, type) {
   }
 
   // Choose terminal name based on task type
-  const terminalName = type === 'run'? "Minecraft Client": type === 'build'? "Minecraft Build": "Minecraft DataGen";
+  const terminalName = type === 'run' ? "Minecraft Client" : 
+                       type === 'build' ? "Minecraft Build" : 
+                       type === 'dataGen' ? "Minecraft DataGen" : 
+                       "Minecraft Utility";
   const terminal = getOrCreateTerminal(terminalName, workspaceFolder.uri.fsPath);
 
   // Run the Gradle command (platform-specific syntax)
@@ -122,7 +125,21 @@ function activate(context) {
       runGradleCommand('runClient', 'run');
     })
   );
+  
+  // Command: Stop Minecraft Daemon
+  context.subscriptions.push(
+    vscode.commands.registerCommand('extension.stopMinecraftClient', () => {
+      runGradleCommand('stop', 'utility');
+    })
+  );
 
+  // Command: Refresh Dependencies
+  context.subscriptions.push(
+    vscode.commands.registerCommand('extension.refreshDependencies', () => {
+      runGradleCommand('dependencies --refresh-dependencies', 'utility');
+    })
+  );
+  
   // Command: Show menu of Minecraft actions
   context.subscriptions.push(
     vscode.commands.registerCommand('extension.showMinecraftMenu', async () => {
@@ -131,7 +148,9 @@ function activate(context) {
           { label: "▶ Run Minecraft Client", command: 'extension.runMinecraftClient' },
           { label: "🔨 Build Project", command: 'extension.buildMinecraftProject' },
           { label: "🗂️ Run Data Generation", command: 'extension.runDataGen' },
-          { label: "🛠️ Build + Run", command: 'extension.buildAndRunMinecraft' }
+          { label: "🛠️ Build + Run", command: 'extension.buildAndRunMinecraft' },
+          { label: "🛑 Stop Daemon", command: 'extension.stopMinecraftClient' },
+          { label: "🔄 Refresh Dependencies", command: 'extension.refreshDependencies' }
         ],
         { placeHolder: "Select an action" }
       );
